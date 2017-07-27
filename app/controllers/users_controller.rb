@@ -4,7 +4,7 @@ end
 
 post '/users' do
   if !logged_in?
-    if params[:password] == params[:confirm_password]
+    if params[:user][:password] == params[:confirm_password]
       new_user = User.new(params[:user])
       if new_user.save
         session[:user_id] = new_user.id
