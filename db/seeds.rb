@@ -7,7 +7,7 @@ Answer.delete_all
 Vote.delete_all
 
 50.times do
-  User.create(username: Faker::Internet.user_name, password_hash: rand(1..9), email: Faker::Internet.email)
+  User.create(username: Faker::Internet.user_name, password: 'password', email: Faker::Internet.email)
 end
 
 250.times do
