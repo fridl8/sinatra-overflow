@@ -1,7 +1,4 @@
-require 'bcrypt'
-
 class User < ActiveRecord::Base
-  include BCrypt
 
   has_many :votes, foreign_key: :voter_id
   has_many :questions, foreign_key: :inquirer_id
@@ -19,12 +16,12 @@ class User < ActiveRecord::Base
 
   def password=(new_password)
     @password = new_password
-    self.password_hash = Password.create(new_password)
+    self.password_hash = BCrypt::Password.create(new_password)
   end
 
-  def authenticate(plain_text_password, email)
+  def authenticate(plain_text_password, email_input)
     user_logging_in = User.find_by(email: email_input)
-    BCrypt::Password.new(user_logging_in.password_hash) == plain_text_password && self.email == email
+    BCrypt::Password.new(user_logging_in.password_hash) == plain_text_password && self.email == email_input
   end
 
 end
