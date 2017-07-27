@@ -18,11 +18,11 @@ end
   Question.create(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, favorite_answer_id: rand(1..250), inquirer_id: rand(1..50))
 end
 
-250.times do
-  Answer.create(body: Faker::RickAndMorty.quote, responder_id: rand(1..50), question_id: rand(1..250))
-end
 
-5000.times do
+1000.times do
   Vote.create(voter_id: rand(1..50), votable_id: rand(1..250), votable_type: COMMENT_AND_VOTE_TYPES.sample)
 end
 
+250.times do
+  Answer.create(body: Faker::RickAndMorty.quote, responder_id: rand(1..50), question_id: rand(1..250))
+end

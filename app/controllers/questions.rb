@@ -1,6 +1,5 @@
 get "/questions" do
   @questions = Question.all.order(:created_at)[0..9]
-  p @questions
   erb :"questions/index"
 end
 
