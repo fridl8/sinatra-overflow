@@ -5,7 +5,7 @@ end
 post '/users' do
   if !logged_in?
     if params[:password] == params[:confirm_password]
-      new_user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      new_user = User.new(params[:user])
       if new_user.save
         session[:user_id] = new_user.id
         redirect '/'
