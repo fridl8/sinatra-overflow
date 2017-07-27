@@ -1,4 +1,4 @@
-COMMENT_AND_VOTE_TYPES = ["question", "answer", "comment"]
+COMMENT_AND_VOTE_TYPES = ["Question", "Answer", "Comment"]
 
 User.delete_all
 Comment.delete_all
