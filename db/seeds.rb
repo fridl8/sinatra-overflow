@@ -22,7 +22,7 @@ end
   Answer.create(body: Faker::RickAndMorty.quote, responder_id: rand(1..50), question_id: rand(1..250))
 end
 
-500.times do
+5000.times do
   Vote.create(voter_id: rand(1..50), votable_id: rand(1..250), votable_type: COMMENT_AND_VOTE_TYPES.sample)
 end
 

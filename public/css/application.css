@@ -1,0 +1,12 @@
+.question {
+  margin: 0 auto;
+  width: 700px;
+}
+
+.favorite_checkbox {
+  display: inline;
+}
+
+.question_votes {
+  float: right;
+}

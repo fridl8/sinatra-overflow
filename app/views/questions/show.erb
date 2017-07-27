@@ -1,0 +1,9 @@
+<% if @question %>
+  <div class="question">
+    <h1><%= @question.title %></h1>
+    <%= erb :"questions/_favorite" %>
+    <span class="question_votes">Votes: <%=@question.votes.count%></span>
+    <p class="question_info">Created by: <%=@question.inquirer.username%> at <%=@question.created_at%></p>
+    <p class="question_body"><%= @question.body %></p>
+  </div>
+<% end %>
