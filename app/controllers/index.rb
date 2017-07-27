@@ -1,5 +1,3 @@
 get "/" do
 
 end
-
-
