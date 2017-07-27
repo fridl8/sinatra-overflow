@@ -1,8 +1,8 @@
-get '/sessions/login' do
+get '/sessions/new' do
 	erb :'/sessions/login'
 end
 
-post '/sessions/login' do
+post '/sessions' do
 	user = User.find_by(email: params[:user][:email])
 	if user && user.authenticate(params[:user][:password], params[:user][:email])
 		session[:user_id] = user.id
@@ -11,4 +11,9 @@ post '/sessions/login' do
 		@errors = ["Could not log in"]
 		erb :'/sessions/login'
 	end
+end
+
+delete '/sessions' do
+	session.delete(:user_id)
+	redirect '/'
 end
