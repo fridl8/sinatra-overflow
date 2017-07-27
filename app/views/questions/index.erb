@@ -1,0 +1,11 @@
+<% if @questions %>
+  <% @questions.each do |question|%>
+  <div class="question">
+    <h2><a href="questions/<%=question.id%>"><%=question.title%></a></h2>
+    <span class="question_votes">Votes: <%=question.votes.count%></span>
+    <p class="question_info">Created by: <%=question.inquirer.username%> at <%=question.created_at%></p>
+    <p class="question_body"><%= question.body %></p>
+    <p class="comment_count"># of comments: <%= question.comments.count %></p>
+  </div>
+  <% end %>
+<% end %>

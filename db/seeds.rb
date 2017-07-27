@@ -10,7 +10,7 @@ Vote.delete_all
   User.create(username: Faker::Internet.user_name, password: rand(1..9), email: Faker::Internet.email)
 end
 
-250.times do
+1000.times do
   Comment.create(body: Faker::Hipster.paragraph, commenter_id: rand(1..50), commentable_id: rand(1..250), commentable_type: COMMENT_AND_VOTE_TYPES.sample )
 end
 
