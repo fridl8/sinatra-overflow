@@ -39,8 +39,6 @@ nav li a:hover {
     background-color: #111;
 }
 
-
-
 .question {
   margin: 0 auto;
   width: 700px;
@@ -57,6 +55,10 @@ nav li a:hover {
 
 .question_votes {
   float: right;
+}
+
+.question_body {
+  display: inline-block;
 }
 
 .answer_container {
@@ -78,8 +80,11 @@ nav li a:hover {
 }
 
 .vote_buttons {
-  margin: 0;
-  margin-right: -50%;
+  position: relative;
+  left: -10px;
+  display: inline-block;
+  margin: 0px;
+  float: left;
   width: 40px;
 }
 

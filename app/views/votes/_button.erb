@@ -1,5 +1,7 @@
-<div class="vote_buttons">
-  <span class="upvote"> </span>
-  <p class="vote_count">10</p>
-  <span class="downvote"> </span>
-</div>
+<% if @question %>
+  <div id="<%=@question.id%>" class="vote_buttons">
+    <span class="upvote"> </span>
+    <p class="vote_count"><%=@question.votes.count%></p>
+    <span class="downvote"> </span>
+  </div>
+<% end %>
