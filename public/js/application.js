@@ -6,7 +6,8 @@ $(document).ready(function() {
   
 });
 
-  var submitAnswerfromForm = $(".answer_form").on("submit", function(event){
+  var submitAnswerfromForm = function () { 
+  	$(".answer_form").on("submit", function(event){
     event.preventDefault();
     var question_route= $(this).attr("action");
     var formData = $(this).serialize();
@@ -24,6 +25,7 @@ $(document).ready(function() {
       alert("Invalid answer.");
     });
   });
+}
 
 var newQuestionButtonClickEvent = function() {
   $('#toggle-question-form').on("click", function(event) {
