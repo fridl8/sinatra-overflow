@@ -7,3 +7,7 @@
     <p class="question_body"><%= @question.body %></p>
   </div>
 <% end %>
+<% if @question.answers %>
+	<!-- REMOVE WHAT IS BELOW FROM HTML. JUST FOR TESTING -->
+	<%= erb :'/answers/show', layout: false %>
+<% end %>
