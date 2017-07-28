@@ -59,6 +59,7 @@ nav li a:hover {
   float: right;
 }
 
+
 .answer_container {
   margin: 0 auto;
   max-width: 600px;
@@ -73,6 +74,6 @@ nav li a:hover {
   width: 600px;
 }
 
-.new-question {
+.new-question, .question-comment-form {
   display: none;
 }
