@@ -10,3 +10,7 @@
 .question_votes {
   float: right;
 }
+
+.new-question {
+  display: none;
+}
