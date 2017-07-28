@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 // Functions
-  var submitAnswerfromForm = function () { 
+  var submitAnswerfromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
     var question_route= $(this).attr("action");
@@ -28,7 +28,7 @@ $(document).ready(function() {
     });
   });
 }
-  
+
 var newQuestionButtonClickEvent = function() {
   $('#toggle-question-form').on("click", function(event) {
     event.preventDefault();
@@ -74,6 +74,8 @@ var newQuestionCommentSubmit = function() {
       url: "/comments",
       data: {body: questionCommentBody, comment_type: commentType, current_question_id: commentQuestionId}
     }).done(function(newCommentInfoObject) {
+      $('#toggle-q-comment-form').toggle();
+      $('.question-comment-form').toggle();
       $('.question-comments').append(newCommentInfoObject);
     }).fail(function(){
       alert("Comment body can't be blank");
