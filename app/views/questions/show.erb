@@ -11,4 +11,11 @@
 	<!-- REMOVE WHAT IS BELOW FROM HTML. JUST FOR TESTING -->
 	<%= erb :'/answers/show', layout: false %>
 <% end %>
+<% if @errors %>
+  <ul>
+    <% @errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= erb :"/answers/_new", locals: {question: @question}%>

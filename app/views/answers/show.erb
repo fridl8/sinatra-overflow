@@ -1,9 +1,9 @@
 <!-- Feel free to alter the hell out of this formatting -->
 <% if @question.answers %>
 	<% @question.answers.each do |answer| %>
-		<ul>
+		<div class="answer">
 			<p><%= answer.body %></p><br>
 			Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %><br>
-		</ul>
+		</div>
 	<% end %>
 <% end %>

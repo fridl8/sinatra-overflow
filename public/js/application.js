@@ -1,7 +1,15 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $(".answer_form").on("submit", function(event){
+    event.preventDefault();
+    var question_route= $(this).attr("action");
+    var formData = $(this).serialize();
+    var response = $.ajax({
+      url : question_route,
+      method : "POST",
+      data : formData
+    });
+    response.done(function(data){
+      console.log(data);
+    })
+  });
 });

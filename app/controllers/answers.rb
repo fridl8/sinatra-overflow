@@ -6,12 +6,16 @@ end
 post "/questions/:id/answers" do
   @answer = Answer.new(body: params[:body], responder_id: current_user.id, question_id: params[:id])
   if @answer.save
-    @question = Question.find_by(id: params[:id])
-    erb :"questions/show"
-    # if request.xhr?
-    #   puts "AJAX REQUEST SUCCESSFUL"
-    # end
+    if request.xhr?
+      puts "AJAX REQUEST SUCCESSFUL"
+      erb :"answers/_answer", layout: false
+    else
+      @question = Question.find_by(id: params[:id])
+      erb :"questions/show"
+    end
   else
-    redirect "/questions/:id"
+    @question = Question.find_by(id: params[:id])
+    @errors = @answer.errors.full_messages
+    erb :"questions/show"
   end
 end
