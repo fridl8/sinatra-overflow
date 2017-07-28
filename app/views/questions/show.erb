@@ -5,9 +5,12 @@
     <span class="question_votes">Votes: <%=@question.votes.count%></span>
     <p class="question_info">Created by: <a href="#"><%=@question.inquirer.username%></a> at <%=@question.created_at%></p>
     <p class="question_body"><%= @question.body %></p>
+
+    <div class="question-comments">
+      <%= erb :'/comments/_new', layout: false %>
+    </div>
   </div>
 <% end %>
 <% if @question.answers %>
-	<!-- REMOVE WHAT IS BELOW FROM HTML. JUST FOR TESTING -->
 	<%= erb :'/answers/show', layout: false %>
 <% end %>
