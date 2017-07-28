@@ -20,12 +20,13 @@
 <body>
   <nav>
     <ul>
+      <li><a href="/questions">Home</a></li>
       <% if logged_in? %>
         <li><a href="#"><%=current_user.username%></a></li>
         <li>
           <form action="/sessions" method="POST">
             <input type="hidden" name="_method" value="delete">
-            <input type="submit" value="Logout">
+            <input id="logout" type="submit" value="Logout">
           </form>
         </li>
       <% else %>

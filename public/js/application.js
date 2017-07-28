@@ -10,6 +10,11 @@ $(document).ready(function() {
     });
     response.done(function(data){
       console.log(data);
-    })
+      $(".answer_container").append(data);
+    });
+
+    response.fail(function(){
+      alert("Invalid answer.");
+    });
   });
 });

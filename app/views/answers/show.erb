@@ -2,8 +2,8 @@
 <% if @question.answers %>
 	<% @question.answers.each do |answer| %>
 		<div class="answer">
-			<p><%= answer.body %></p><br>
-			Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %><br>
+			<p><%= answer.body %></p>
+			<p>Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %></p>
 		</div>
 	<% end %>
 <% end %>

@@ -8,8 +8,9 @@
   </div>
 <% end %>
 <% if @question.answers %>
-	<!-- REMOVE WHAT IS BELOW FROM HTML. JUST FOR TESTING -->
-	<%= erb :'/answers/show', layout: false %>
+  <div class="answer_container">
+	 <%= erb :'/answers/show', layout: false %>
+  </div>
 <% end %>
 <% if @errors %>
   <ul>
@@ -18,4 +19,4 @@
     <% end %>
   </ul>
 <% end %>
-<%= erb :"/answers/_new", locals: {question: @question}%>
+<%= erb :"/answers/_new", locals: {question: @question}, layout: false%>
