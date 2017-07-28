@@ -9,7 +9,7 @@
     <div class="question-comments">
       <% if @question.comments %>
         <% @question.comments.each do |comment| %>
-          <%= erb :'/comments/_qshow', layout: false, locals: {votes: comment.votes.count, body: comment.body, username: comment.commenter.username, created_at: comment.created_at} %>
+          <%= erb :'/comments/_show', layout: false, locals: {votes: comment.votes.count, body: comment.body, username: comment.commenter.username, created_at: comment.created_at} %>
         <% end %>
       <% end %>
     </div>

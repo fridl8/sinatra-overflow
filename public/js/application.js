@@ -35,7 +35,7 @@ var newQuestionCommentButtonClickEvent = function() {
   $('#toggle-q-comment-form').on('click', function(event) {
     event.preventDefault();
     $(event.target).toggle();
-    $('.question-comments').toggle();
+    $('.question-comment-form').toggle();
   });
 }
 
@@ -49,10 +49,10 @@ var newQuestionCommentSubmit = function() {
       method: "post",
       url: "/comments",
       data: {body: questionCommentBody, comment_type: commentType, current_question_id: commentQuestionId}
-    }).done(function(newCommentInformationObject) {
-      $('.question-comments').append()
+    }).done(function(newCommentInfoObject) {
+      $('.question-comments').append(newCommentInfoObject);
     }).fail(function(){
-      alert("Comment body can't be blank")
+      alert("Comment body can't be blank");
     })
   });
 }

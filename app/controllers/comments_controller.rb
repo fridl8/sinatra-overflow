@@ -6,8 +6,7 @@ post '/comments' do
         if current_question.comments << Comment.new(body: params[:body], commenter_id: session[:user_id]) == false
           status 422
         else
-          content_type :json
-          {commenter_id: session[:user_id], commentable_id: params[:current_question_id].to_i, commentable_type: 'Question'}.to_json
+          erb :'/comments/_show', layout: false, :locals => {votes: current_question.votes.count, body: current_question.comments.last.body, username: current_user.username, created_at: current_question.comments.last.created_at}
         end
       else
         if current_question.comments << Comment.new(body: params[:body], commenter_id: session[:user_id]) == false
@@ -24,8 +23,7 @@ post '/comments' do
         if current_answer.comments << Comment.new(body: params[:body], commenter_id: session[:user_id]) == false
           status 422
         else
-          content_type :json
-          {commenter_id: session[:user_id], commentable_id: params[:current_answer_id], commentable_type: 'Answer'}.to_json
+          erb :'/comments/_show', layout: false, :locals => {votes: current_answer.votes.count, body: current_answer.comments.last.body, username: current_user.username, created_at: current_answer.comments.last.created_at}
         end
       else
         if current_answer.comments << Comment.new(body: params[:body], commenter_id: session[:user_id]) == false
