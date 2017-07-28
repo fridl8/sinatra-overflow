@@ -11,6 +11,6 @@
   float: right;
 }
 
-.new-question {
+.new-question, .question-comments {
   display: none;
 }
