@@ -2,6 +2,7 @@ $(document).ready(function() {
   newQuestionButtonClickEvent();
   newQuestionSubmit();
   newQuestionCommentButtonClickEvent();
+  newQuestionCommentSubmit();
 });
 // Functions
 var newQuestionButtonClickEvent = function() {
@@ -39,17 +40,18 @@ var newQuestionCommentButtonClickEvent = function() {
 }
 
 var newQuestionCommentSubmit = function() {
-  $('.question-comments').on('submit', '.new-comment-form', function(){
+  $('.question-comment-form').on('submit', '#new-comment-form', function(){
     event.preventDefault();
     var commentType = 'question'
     var questionCommentBody = $('#new-comment-form').find('textarea').val();
+    var commentQuestionId = $("#new-comment-form").find("input").first().val();
     $.ajax({
       method: "post",
       url: "/comments",
-      data: {body: questionCommentBody, comment_type: commentType}
-    }).done(function(newCommentObject) {
-
-    }).fail(function(errors){
+      data: {body: questionCommentBody, comment_type: commentType, current_question_id: commentQuestionId}
+    }).done(function(newCommentInformationObject) {
+      $('.question-comments').append()
+    }).fail(function(){
       alert("Comment body can't be blank")
     })
   });

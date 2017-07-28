@@ -11,6 +11,6 @@
   float: right;
 }
 
-.new-question, .question-comments {
+.new-question, .question-comment-form {
   display: none;
 }
