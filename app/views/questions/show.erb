@@ -6,6 +6,7 @@
     <p class="question_info">Created by: <a href="#"><%=@question.inquirer.username%></a> at <%=@question.created_at%></p>
     <p class="question_body"><%= @question.body %></p>
 
+    <button id="toggle-q-comment-form" type="button">New Comment</button>
     <div class="question-comments">
       <%= erb :'/comments/_new', layout: false %>
     </div>

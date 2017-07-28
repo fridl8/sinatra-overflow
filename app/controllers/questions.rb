@@ -30,6 +30,7 @@ post "/questions" do
       end
     end
   else
-   redirect '/sessions/new'
+    @errors = ["You need to be logged in"]
+    erb :'/sessions/login'
   end
 end
