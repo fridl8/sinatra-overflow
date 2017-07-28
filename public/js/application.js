@@ -3,10 +3,34 @@ $(document).ready(function() {
   newQuestionButtonClickEvent();
   newQuestionSubmit();
   submitAnswerfromForm();
-  
+  vote();
+
 });
 
-  var submitAnswerfromForm = function () { 
+  var vote = function(){
+    $('.vote_buttons').on('click', function(event){
+      $button = $(event.target)
+
+      var response = $.ajax({
+        url : window.location,
+        method : "GET"
+      });
+
+      response.done(function(data){
+        if ($button.attr("class") === "upvote" || $button.attr("class") === "upvote on") {
+            var $otherButton =  $button.parent().find(".downvote");
+            $otherButton.removeClass("on");
+            $button.toggleClass('on');
+          } else {
+            var $otherButton =  $button.parent().find(".upvote");
+            $otherButton.removeClass("on");
+            $button.toggleClass('on');
+          }
+      })
+    });
+}
+
+  var submitAnswerfromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
     var question_route= $(this).attr("action");
