@@ -1,0 +1,6 @@
+<% if @answer %>
+  <div class="answer">
+    <p><%= @answer.body %></p>
+    <p>Answered by: <%= @answer.responder.username %> on: <%= @answer.responder.created_at %></p>
+  </div>
+<% end %>

@@ -1,10 +1,34 @@
 $(document).ready(function() {
+
   newQuestionButtonClickEvent();
   newQuestionSubmit();
   newQuestionCommentButtonClickEvent();
   newQuestionCommentSubmit();
+  submitAnswerfromForm();
 });
+
 // Functions
+  var submitAnswerfromForm = function () { 
+  	$(".answer_form").on("submit", function(event){
+    event.preventDefault();
+    var question_route= $(this).attr("action");
+    var formData = $(this).serialize();
+    var response = $.ajax({
+      url : question_route,
+      method : "POST",
+      data : formData
+    });
+    response.done(function(data){
+      console.log(data);
+      $(".answer_container").append(data);
+    });
+
+    response.fail(function(){
+      alert("Invalid answer.");
+    });
+  });
+}
+  
 var newQuestionButtonClickEvent = function() {
   $('#toggle-question-form').on("click", function(event) {
     event.preventDefault();
