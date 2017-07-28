@@ -2,13 +2,15 @@ post "/questions/:id/votes" do
   authorize!
   @question = Question.find_by(id: params[:id])
   if request.xhr?
-    # Vote.create(voter_id: current_user.id)
-    if params[:vote] > 0
-      @question << Vote.new(voter_id: current_user.id, value: 1)
-      @question.sum_vote_values
-    elsif params[:vote] < 0
-      @question << Vote.new(voter_id: current_user.id, value: -1)
-      @question.sum_vote_values
+    if params[:vote] == '1'
+      @question.votes << Vote.new(voter_id: current_user.id, value: 1)
+      @question.sum_vote_values.to_s
+    elsif params[:vote] == '-1'
+      @question.votes << Vote.new(voter_id: current_user.id, value: -1)
+      @question.sum_vote_values.to_s
+    else
+      @question.votes.find_by(voter_id: current_user.id).delete
+      @question.sum_vote_values.to_s
     end
   end
 end

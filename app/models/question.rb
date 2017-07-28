@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :votes, as: :votable, dependent: :destroy
   has_many :answers
+  has_many :voters, through: :votes, source: :voter
 
   validates_presence_of :title, :body, :inquirer_id
 

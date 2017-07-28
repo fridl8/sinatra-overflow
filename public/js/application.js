@@ -22,7 +22,9 @@ $(document).ready(function() {
           };
         } else {
           console.log("DELETE VOTE!");
-          // DELETE VOTE
+          var vote_data = {
+            'vote' : 0
+          };
         }
       } else {
         var $otherButton =  $button.parent().find(".upvote");
@@ -35,7 +37,9 @@ $(document).ready(function() {
           };
         } else {
           console.log("DELETE VOTE!");
-          // DELETE VOTE
+          var vote_data = {
+            'vote' : 0
+          };
       }
     }
 
@@ -47,6 +51,7 @@ $(document).ready(function() {
 
       response.done(function(data){
         console.log(data);
+        $('.vote_buttons').find(".vote_count").text(data)
       })
     });
 }
