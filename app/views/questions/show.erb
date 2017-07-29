@@ -4,17 +4,33 @@
     <%= erb :"/questions/_favorite" %>
     <span class="question_votes">Votes: <%=@question.votes.count%></span>
     <p class="question_info">Created by: <a href="#"><%=@question.inquirer.username%></a> at <%=@question.created_at%></p>
+
     <div class="question_body">
     <%= erb :"/votes/_button" %>
     <p><%= @question.body %></p>
 
+    <div class="question-comments">
+      <% if @question.comments %>
+        <% @question.comments.each do |comment| %>
+          <%= erb :'/comments/_show', layout: false, locals: {votes: comment.votes.count, body: comment.body, username: comment.commenter.username, created_at: comment.created_at} %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <button id="toggle-q-comment-form" type="button">New Comment</button>
+    <div class="question-comment-form">
+      <%= erb :'/comments/_new', layout: false %>
+    </div>
+
   </div>
 <% end %>
+
 <% if @question.answers %>
   <div class="answer_container">
 	 <%= erb :'/answers/show', layout: false %>
   </div>
 <% end %>
+
 <% if @errors %>
   <ul>
     <% @errors.each do |error| %>
