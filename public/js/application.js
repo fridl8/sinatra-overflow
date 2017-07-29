@@ -237,7 +237,7 @@ var favoriteAnswerClickEvent = function() {
   $('.favorite-button-form').on('click', '#favorite-button', function(event) {
     event.preventDefault();
     var url = $(event.target).parent().attr('action');
-    var answerToFavoriteId = $(event.target).parent().parent().find('p').first().attr('data-answer-id')
+    var answerToFavoriteId = $(event.target).parent().closest('.answer').find('p').last().prev().attr('data-answer-id');
     console.log(url);
     $.ajax({
       url: url,
