@@ -159,7 +159,8 @@ var newAnswerCommentSubmit = function() {
     var commentType = 'answer';
     var answerCommentBody = $(event.target).find('textarea').val();
     var commentAnswerId = $(event.target).parent().closest('.answer').find('p').first().attr('data-answer-id');
-    
+    // console.log($(event.target).parent().parent().children().closest('div').find('.answer-comments'));
+
     var request = $.ajax({
       url: url,
       method: type,
@@ -167,10 +168,10 @@ var newAnswerCommentSubmit = function() {
     })
     request.done(function(response) {
       $(event.target).parent().toggle();
-    $(event.target).parent().parent().find('#toggle-a-comment-form').toggle();
+      $(event.target).parent().parent().find('#toggle-a-comment-form').toggle();
       $(event.target).parent().find('#toggle-a-comment-form').toggle();
       $(event.target).find('textarea').val("")
-      $(event.target).parent().closest('.answer').parent().find('div').first().find('.answer-comments').append(response);
+      $(event.target).parent().parent().children().closest('div').find('.answer-comments').append(response);
 
     })
   })
