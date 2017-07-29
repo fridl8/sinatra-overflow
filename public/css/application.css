@@ -75,7 +75,7 @@ nav li a:hover {
   width: 600px;
 }
 
-.new-question, .question-comment-form {
+.new-question, .question-comment-form, .answer-comment-form {
   display: none;
 }
 

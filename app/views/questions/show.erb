@@ -21,14 +21,16 @@
     <div class="question-comment-form">
       <%= erb :'/comments/_new', layout: false %>
     </div>
-      
+
   </div>
 <% end %>
+
 <% if @question.answers %>
   <div class="answer_container">
 	 <%= erb :'/answers/show', layout: false %>
   </div>
 <% end %>
+
 <% if @errors %>
   <ul>
     <% @errors.each do |error| %>
