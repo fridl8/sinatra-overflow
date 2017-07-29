@@ -20,6 +20,10 @@ post '/comments' do
     else
       current_answer = Answer.find_by(id: params[:current_answer_id].to_i)
       if request.xhr?
+        p '=========================='
+        p params
+        p current_answer
+        p '=========================='
         if current_answer.comments << Comment.new(body: params[:body], commenter_id: session[:user_id]) == false
           status 422
         else
