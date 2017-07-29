@@ -39,3 +39,32 @@ post "/questions" do
     erb :'/sessions/login'
   end
 end
+
+post '/questions/:id/favorite' do
+  if logged_in?
+    @question = Question.find_by(id: params[:id])
+    if current_user.id == @question.inquirer_id
+      if request.xhr?
+        @question.favorite_answer_id = params[:answer_id]
+        if @question.save
+          "Favorited"
+        else
+          status 422
+        end
+      else
+        @question.favorite_answer_id = params[:answer_id]
+        if @question.save
+          redirect back
+        else
+          @errors = ["Couldn't do that"]
+          erb :"/questions/#{params[:id]}"
+        end
+      end
+    else
+      status 422
+    end
+  else
+    @errors = ["You must be logged iN"]
+    erb :'/sessions/login'
+  end
+end

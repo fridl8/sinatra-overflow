@@ -7,6 +7,7 @@ $(document).ready(function() {
   voteClickEvent();
   newAnswerCommentSubmit();
   newAnswerCommentButtonClickEvent();
+  favoriteAnswerClickEvent();
   answerVoteClickEvent();
 });
 // Functions
@@ -216,7 +217,6 @@ var newAnswerCommentSubmit = function() {
     var commentType = 'answer';
     var answerCommentBody = $(event.target).find('textarea').val();
     var commentAnswerId = $(event.target).parent().closest('.answer').find('p').first().attr('data-answer-id');
-    // console.log($(event.target).parent().parent().children().closest('div').find('.answer-comments'));
 
     var request = $.ajax({
       url: url,
@@ -232,4 +232,23 @@ var newAnswerCommentSubmit = function() {
 
     })
   })
+}
+
+var favoriteAnswerClickEvent = function() {
+  $('.favorite-button-form').on('click', '#favorite-button', function(event) {
+    event.preventDefault();
+    var url = $(event.target).parent().attr('action');
+    var answerToFavoriteId = $(event.target).parent().parent().find('p').first().attr('data-answer-id')
+    console.log(url);
+    $.ajax({
+      url: url,
+      method: "post",
+      data: {answer_id: answerToFavoriteId}
+    }).done(function(response){
+      console.log(response);
+      $(event.target).parent().toggle();
+    }).fail(function(){
+      alert("No.");
+    })
+  });
 }
