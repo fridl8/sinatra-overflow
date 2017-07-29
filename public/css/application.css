@@ -79,7 +79,7 @@ nav li a:hover {
   display: none;
 }
 
-.vote_buttons {
+.vote_buttons, .answer_vote_buttons {
   position: relative;
   left: -10px;
   display: inline-block;
@@ -88,7 +88,7 @@ nav li a:hover {
   width: 40px;
 }
 
-.vote_buttons p{
+.vote_buttons, .answer_vote_buttons p{
   text-align: center;
   line-height: 10px;
 }

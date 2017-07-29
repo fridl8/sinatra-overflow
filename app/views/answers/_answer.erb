@@ -1,5 +1,6 @@
 <% if @answer %>
   <div class="answer">
+    <%= erb :"/votes/_answer_vote_button_created", layout: false %>
     <p><%= @answer.body %></p>
     <p>Answered by: <%= @answer.responder.username %> on: <%= @answer.responder.created_at %></p>
   </div>
