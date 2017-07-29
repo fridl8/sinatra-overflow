@@ -1,9 +1,24 @@
-<!-- Feel free to alter the hell out of this formatting -->
 <% if @question.answers %>
 	<% @question.answers.each do |answer| %>
 		<div class="answer">
 			<p><%= answer.body %></p>
 			<p>Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %></p>
-		</div>
+
+    <div class="answer-comments">
+      <% @question.answers.each do |answer| %>
+        <% if answer.comments %>
+          <% answer.comments.each do |comment| %>
+          <%= erb :'/comments/_show', layout: false, locals: {votes: comment.votes.count, body: comment.body, username: comment.commenter.username, created_at: comment.created_at} %>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+
+    <button id="toggle-a-comment-form" type="button">New Comment</button>
+    <div class="answer-comment-form">
+      <%= erb :'/comments/_new', layout: false %>
+    </div>
+
+	</div>
 	<% end %>
 <% end %>

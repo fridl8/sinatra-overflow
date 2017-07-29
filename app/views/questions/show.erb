@@ -20,11 +20,13 @@
     </div>
   </div>
 <% end %>
+
 <% if @question.answers %>
   <div class="answer_container">
 	 <%= erb :'/answers/show', layout: false %>
-  </div>
+
 <% end %>
+</div>
 <% if @errors %>
   <ul>
     <% @errors.each do |error| %>

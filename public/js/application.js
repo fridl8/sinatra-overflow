@@ -4,11 +4,13 @@ $(document).ready(function() {
   newQuestionSubmit();
   newQuestionCommentButtonClickEvent();
   newQuestionCommentSubmit();
-  submitAnswerfromForm();
+  submitAnswerFromForm();
+  newAnswerCommentButtonClickEvent();
+  newAnswerCommentSubmit();
 });
 
 // Functions
-  var submitAnswerfromForm = function () {
+  var submitAnswerFromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
     var question_route= $(this).attr("action");
@@ -19,7 +21,6 @@ $(document).ready(function() {
       data : formData
     });
     response.done(function(data){
-      console.log(data);
       $(".answer_container").append(data);
     });
 
@@ -64,7 +65,7 @@ var newQuestionCommentButtonClickEvent = function() {
 }
 
 var newQuestionCommentSubmit = function() {
-  $('.question-comment-form').on('submit', '#new-comment-form', function(){
+  $('.question-comment-form').on('submit', '#new-comment-form', function(event){
     event.preventDefault();
     var commentType = 'question'
     var questionCommentBody = $('#new-comment-form').find('textarea').val();
@@ -76,9 +77,44 @@ var newQuestionCommentSubmit = function() {
     }).done(function(newCommentInfoObject) {
       $('#toggle-q-comment-form').toggle();
       $('.question-comment-form').toggle();
+      $(event.target).parent().find('textarea[name="comment[body]"]').val("");
       $('.question-comments').append(newCommentInfoObject);
     }).fail(function(){
       alert("Comment body can't be blank");
     })
   });
+}
+
+var newAnswerCommentButtonClickEvent = function() {
+  $('.answer').on('click', "#toggle-a-comment-form", function(event) {
+    event.preventDefault();
+    $(event.target).parent().find(".answer-comment-form").toggle();
+    $(event.target).toggle();
+  });
+}
+
+var newAnswerCommentSubmit = function() {
+  $(".answer-comment-form").on("submit", "#new-comment-form", function(event) {
+    event.preventDefault();
+
+    var $formData = $(event.target);
+    var url = $formData.attr("action");
+    var type = $formData.attr("method");
+
+    var commentType = 'answer';
+    var answerCommentBody = $(event.target).find('textarea').val();
+    var commentAnswerId = $(event.target).find("input").first().val();
+
+console.log(answerCommentBody);
+console.log(commentAnswerId);
+
+    var request = $.ajax({
+      url: url,
+      method: type,
+      data: {body: answerCommentBody, comment_type: commentType, current_answer_id: commentAnswerId}
+    })
+    request.done(function(response) {
+      $(event.target).parent().parent().closest(".answer-comments").append(response);
+    })
+  })
 }

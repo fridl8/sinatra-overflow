@@ -18,6 +18,8 @@ post '/comments' do
         end
       end
     else
+      p "=================="
+      p params
       current_answer = Answer.find_by(id: params[:current_answer_id].to_i)
       if request.xhr?
         if current_answer.comments << Comment.new(body: params[:body], commenter_id: session[:user_id]) == false

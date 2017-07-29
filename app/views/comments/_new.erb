@@ -1,9 +1,9 @@
 <h4>Post a commEnt</h4>
 <form id="new-comment-form" action="/comments" method="post">
-  <% if @question %>
+  <% if @question.answers %>
   <input type="hidden" name="current_question_id" value="<%= @question.id %>">
   <% else %>
-  <input type="hidden" name="current_answer_id" value="<%= @answer.id %>">
+  <input type="hidden" name="current_answer_id" value="<%= answer.id %>">
   <% end %>
   <textarea rows="2" cols="35" name="comment[body]" placeholder="Words go here..."></textarea><br>
   <input type="submit" value="POST MY COMMenT">
