@@ -7,13 +7,15 @@ $(document).ready(function() {
   voteClickEvent();
   newAnswerCommentSubmit();
   newAnswerCommentButtonClickEvent();
+  answerVoteClickEvent();
 });
 // Functions
   var submitAnswerFromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
-    var question_route= $(this).attr("action");
+    var question_route = $(this).attr("action");
     var formData = {body: $(event.target).find('textarea').val()};
+
     var response = $.ajax({
       url : question_route,
       method : "POST",
@@ -80,6 +82,61 @@ var newQuestionCommentSubmit = function() {
       $('.question-comments').append(newCommentInfoObject);
     }).fail(function(){
       alert("Comment body can't be blank");
+    })
+  });
+}
+
+  var answerVoteClickEvent = function(){
+    $('.answer_container').on('click', ".answer_vote_buttons", function(event){
+      var $button = $(event.target);
+      var answer_id = $(this).attr("id");
+      if (upVoteButton($button)) {
+      var $otherButton =  $button.parent().find(".downvote");
+      $otherButton.removeClass("on");
+      $button.toggleClass('on');
+      if (upVote($button)) {
+        console.log("VOTE UP!");
+        var vote_data = {
+          'vote' : 1
+        };
+      } else {
+        console.log("DELETE VOTE!");
+        var vote_data = {
+          'vote' : 0
+        };
+      }
+    } else {
+      var $otherButton =  $button.parent().find(".upvote");
+      $otherButton.removeClass("on");
+      $button.toggleClass('on');
+      if ($button.attr("class") === "downvote on") {
+        console.log("VOTE DOWN!");
+        var vote_data = {
+          'vote' : -1
+        };
+      } else {
+        console.log("DELETE VOTE!");
+        var vote_data = {
+          'vote' : 0
+        };
+    }
+    }
+
+    var response = $.ajax({
+      url : "/answers/" + answer_id + "/votes",
+      method : "POST",
+      data : vote_data
+    });
+
+    response.done(function(data){
+      console.log(data);
+      $('#' + answer_id).find(".vote_count").text(data)
+    })
+
+    response.fail(function(){
+      console.log("fail");
+      $('.vote-error').remove();
+      $('.question_info').append("<p class='vote-error'>You must be logged in to vote</p>")
     })
   });
 }

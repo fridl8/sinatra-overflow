@@ -5,4 +5,8 @@ class Answer < ActiveRecord::Base
   has_many :votes, as: :votable, dependent: :destroy
 
   validates_presence_of :body, :responder_id, :question_id
+
+  def sum_vote_values
+    self.votes.sum(:value)
+  end
 end
