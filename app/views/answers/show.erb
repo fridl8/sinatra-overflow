@@ -8,6 +8,8 @@
           <% end %>
         <% end %>
       <% end %>
+
+      <%= erb :"/votes/_answer_vote_button_existing", locals: {answer: answer} %>
       <p data-answer-id="<%= answer.id %>"><%= answer.body %></p>
       <p>Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %></p>
 
