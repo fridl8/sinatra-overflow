@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 });
 
+
   var vote = function(){
     $('.vote_buttons').on('click', function(event){
       $button = $(event.target);
