@@ -27,16 +27,20 @@ helpers do
   end
 
   def on_upvote
-    @vote = @question.votes.find_by(voter_id: current_user.id)
-    if @vote
-      @vote.value == 1 ? " on" : ""
+    if logged_in?
+      @vote = @question.votes.find_by(voter_id: current_user.id)
+      if @vote
+        @vote.value == 1 ? " on" : ""
+      end
     end
   end
 
   def on_downvote
-    @vote = @question.votes.find_by(voter_id: current_user.id)
-    if @vote
-      @vote.value == -1 ? " on" : ""
+    if logged_in?
+      @vote = @question.votes.find_by(voter_id: current_user.id)
+      if @vote
+        @vote.value == -1 ? " on" : ""
+      end
     end
   end
 end

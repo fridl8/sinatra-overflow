@@ -8,6 +8,6 @@ class Question < ActiveRecord::Base
   validates_presence_of :title, :body, :inquirer_id
 
   def sum_vote_values
-    self.votes.map(&:value).reduce(:+)
+    self.votes.sum(:value)
   end
 end

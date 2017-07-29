@@ -10,13 +10,13 @@ $(document).ready(function() {
 
   var vote = function(){
     $('.vote_buttons').on('click', function(event){
-      $button = $(event.target);
+      var $button = $(event.target);
       var question_id = $(this).attr("id");
-      if ($button.attr("class") === "upvote" || $button.attr("class") === "upvote on") {
+      if (upVoteButton($button)) {
         var $otherButton =  $button.parent().find(".downvote");
         $otherButton.removeClass("on");
         $button.toggleClass('on');
-        if ($button.attr("class") === "upvote on") {
+        if (upVote($button)) {
           console.log("VOTE UP!");
           var vote_data = {
             'vote' : 1
@@ -53,6 +53,12 @@ $(document).ready(function() {
       response.done(function(data){
         console.log(data);
         $('.vote_buttons').find(".vote_count").text(data)
+      })
+
+      response.fail(function(){
+        console.log("fail");
+        $('.vote-error').remove();
+        $('.question_info').append("<p class='vote-error'>You must be logged in to vote</p>")
       })
     });
 }
