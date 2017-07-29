@@ -5,15 +5,12 @@
       <p>Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %></p>
 
       <div class="answer-comments">
-        <% @question.answers.each do |answer| %>
-          <% if answer.comments %>
-            <% answer.comments.each do |comment| %>
-              <%= erb :'/comments/_show', layout: false, locals: {votes: comment.votes.count, body: comment.body, username: comment.commenter.username, created_at: comment.created_at} %>
-            <% end %>
+        <% if answer.comments %>
+          <% answer.comments.each do |comment| %>
+            <%= erb :'/comments/_show', layout: false, locals: {votes: comment.votes.count, body: comment.body, username: comment.commenter.username, created_at: comment.created_at} %>
           <% end %>
         <% end %>
       </div>
-<!-- make commentable id match answer.id -->
     <button id="toggle-a-comment-form" type="button">New Comment</button>
     <div class="answer-comment-form">
       <%= erb :'/comments/_new', layout: false %>
