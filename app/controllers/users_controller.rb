@@ -22,3 +22,8 @@ post '/users' do
     erb :'/'
   end
 end
+
+get '/users/:id' do
+  authorize!
+  erb :"/users/show"
+end

@@ -44,4 +44,24 @@ helpers do
     end
   end
 
+  def on_downvote_answer
+    if logged_in?
+      p @answer
+      @vote = @answer.votes.find_by(voter_id: current_user.id)
+      if @vote
+        @vote.value == -1 ? " on" : ""
+      end
+    end
+  end
+
+  def on_upvote_answer
+    if logged_in?
+      p @answer
+      @vote = @answer.votes.find_by(voter_id: current_user.id)
+      if @vote
+        @vote.value == 1 ? " on" : ""
+      end
+    end
+  end
+
 end
