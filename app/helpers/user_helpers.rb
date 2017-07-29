@@ -10,4 +10,8 @@ helpers do
     !!current_user
   end
 
+  def authorize!
+    redirect '/sessions/new' unless logged_in?
+  end
+
 end

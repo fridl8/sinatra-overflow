@@ -26,7 +26,7 @@ end
 
 
 vote_amount.times do #not sure if I broke the voting portion - Matt
-  Vote.create!(voter_id: rand(1..user_amount), votable_id: rand(1..question_amount), votable_type: COMMENT_AND_VOTE_TYPES.sample)
+  Vote.create!(voter_id: rand(1..user_amount), votable_id: rand(1..question_amount), votable_type: COMMENT_AND_VOTE_TYPES.sample, value: [-1,1].sample)
 end
 
 answer_amount.times do

@@ -8,6 +8,7 @@ get "/questions/:id" do
   erb :"questions/show"
 end
 
+
 post "/questions" do
   if logged_in?
     new_question = Question.new(title: params[:title], inquirer_id: session[:user_id], body: params[:body])
