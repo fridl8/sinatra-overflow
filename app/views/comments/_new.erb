@@ -2,9 +2,9 @@
 <form id="new-comment-form" action="/comments" method="post">
   <% if @question %>
   <input type="hidden" name="current_question_id" value="<%= @question.id %>">
-  <% else %>
+  <% elsif @answer %>
   <input type="hidden" name="current_answer_id" value="<%= @answer.id %>">
   <% end %>
   <textarea rows="2" cols="35" name="comment[body]" placeholder="Words go here..."></textarea><br>
   <input type="submit" value="POST MY COMMenT">
-</form>
+</form><br>

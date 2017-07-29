@@ -1,25 +1,26 @@
 $(document).ready(function() {
-
   newQuestionButtonClickEvent();
   newQuestionSubmit();
   newQuestionCommentButtonClickEvent();
   newQuestionCommentSubmit();
-  submitAnswerfromForm();
-  vote();
+  submitAnswerFromForm();
+  voteClickEvent();
+  newAnswerCommentSubmit();
+  newAnswerCommentButtonClickEvent();
 });
 // Functions
-  var submitAnswerfromForm = function () {
+  var submitAnswerFromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
     var question_route= $(this).attr("action");
-    var formData = $(this).serialize();
+    var formData = {body: $(event.target).find('textarea').val()};
     var response = $.ajax({
       url : question_route,
       method : "POST",
       data : formData
     });
     response.done(function(data){
-      console.log(data);
+      $(event.target).find('textarea').val("")
       $(".answer_container").append(data);
     });
 
@@ -83,51 +84,85 @@ var newQuestionCommentSubmit = function() {
   });
 }
 
-  var vote = function(){
-    $('.vote_buttons').on('click', function(event){
-      $button = $(event.target);
-      var question_id = $(this).attr("id");
-      if ($button.attr("class") === "upvote" || $button.attr("class") === "upvote on") {
-        var $otherButton =  $button.parent().find(".downvote");
-        $otherButton.removeClass("on");
-        $button.toggleClass('on');
-        if ($button.attr("class") === "upvote on") {
-          console.log("VOTE UP!");
-          var vote_data = {
-            'vote' : 1
-          };
-        } else {
-          console.log("DELETE VOTE!");
-          var vote_data = {
-            'vote' : 0
-          };
-        }
+var voteClickEvent = function(){
+  $('.vote_buttons').on('click', function(event){
+    $button = $(event.target);
+    var question_id = $(this).attr("id");
+    if ($button.attr("class") === "upvote" || $button.attr("class") === "upvote on") {
+      var $otherButton =  $button.parent().find(".downvote");
+      $otherButton.removeClass("on");
+      $button.toggleClass('on');
+      if ($button.attr("class") === "upvote on") {
+        console.log("VOTE UP!");
+        var vote_data = {
+          'vote' : 1
+        };
       } else {
-        var $otherButton =  $button.parent().find(".upvote");
-        $otherButton.removeClass("on");
-        $button.toggleClass('on');
-        if ($button.attr("class") === "downvote on") {
-          console.log("VOTE DOWN!");
-          var vote_data = {
-            'vote' : -1
-          };
-        } else {
-          console.log("DELETE VOTE!");
-          var vote_data = {
-            'vote' : 0
-          };
+        console.log("DELETE VOTE!");
+        var vote_data = {
+          'vote' : 0
+        };
       }
+    } else {
+      var $otherButton =  $button.parent().find(".upvote");
+      $otherButton.removeClass("on");
+      $button.toggleClass('on');
+      if ($button.attr("class") === "downvote on") {
+        console.log("VOTE DOWN!");
+        var vote_data = {
+          'vote' : -1
+        };
+      } else {
+        console.log("DELETE VOTE!");
+        var vote_data = {
+          'vote' : 0
+        };
     }
-
-      var response = $.ajax({
-        url : "/questions/" + question_id + "/votes",
-        method : "POST",
-        data : vote_data
-      });
-
-      response.done(function(data){
-        console.log(data);
-        $('.vote_buttons').find(".vote_count").text(data)
-      })
-    });
   }
+
+    var response = $.ajax({
+      url : "/questions/" + question_id + "/votes",
+      method : "POST",
+      data : vote_data
+    });
+
+    response.done(function(data){
+      console.log(data);
+      $('.vote_buttons').find(".vote_count").text(data)
+    })
+  });
+}
+
+var newAnswerCommentButtonClickEvent = function() {
+  $('.answer').on('click', "#toggle-a-comment-form", function(event) {
+    event.preventDefault();
+    $(event.target).parent().find(".answer-comment-form").toggle();
+    $(event.target).toggle();
+  });
+}
+
+var newAnswerCommentSubmit = function() {
+  $(".answer-comment-form").on("submit", "#new-comment-form", function(event) {
+    event.preventDefault();
+
+    var $formData = $(event.target);
+    var url = $formData.attr("action");
+    var type = $formData.attr("method");
+
+    var commentType = 'answer';
+    var answerCommentBody = $(event.target).find('textarea').val();
+    var commentAnswerId = $(event.target).parent().closest('.answer').find('p').first().attr('data-answer-id');
+    var request = $.ajax({
+      url: url,
+      method: type,
+      data: {body: answerCommentBody, comment_type: commentType, current_answer_id: commentAnswerId}
+    })
+    request.done(function(response) {
+      $(event.target).parent().toggle();
+    $(event.target).parent().parent().find('#toggle-a-comment-form').toggle();
+      $(event.target).parent().find('#toggle-a-comment-form').toggle();
+      $(event.target).find('textarea').val("")
+      $(event.target).parent().closest('.answer').parent().find('div').first().find('.answer-comments').append(response);
+    })
+  })
+}

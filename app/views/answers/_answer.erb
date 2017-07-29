@@ -3,4 +3,9 @@
     <p><%= @answer.body %></p>
     <p>Answered by: <%= @answer.responder.username %> on: <%= @answer.responder.created_at %></p>
   </div>
+
+  <button id="toggle-a-comment-form" type="button">New Comment</button>
+  <div class="answer-comment-form">
+    <%= erb :'/comments/_new', layout: false %>
+  </div>
 <% end %>

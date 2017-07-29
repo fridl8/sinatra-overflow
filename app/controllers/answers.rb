@@ -9,7 +9,7 @@ post "/questions/:id/answers" do
     if request.xhr?
       if @answer.save
         puts "AJAX REQUEST SUCCESSFUL"
-        erb :"answers/_answer", layout: false
+        erb :"/answers/_answer", layout: false
       else
         status 422
       end
