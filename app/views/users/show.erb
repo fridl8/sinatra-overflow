@@ -1,28 +1,43 @@
-<h1>Welcome to your profile <%=current_user.username%></h1>
+<% if @user %>
+  <h1>Welcome to your profile <%=@user.username%></h1>
 
-<h2>Your questions: </h2>
-<ul>
-  <% if current_user.questions %>
-    <% current_user.questions.each do |question|%>
-      <li><a href="/questions/<%=question.id%>"><%=question.title%></a></li>
+  <h2>Your questions: </h2>
+  <ul>
+    <% if @user.questions %>
+      <% @user.questions.each do |question|%>
+        <li><a href="/questions/<%=question.id%>"><%=question.title%></a></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
 
-<h2>Your answers: </h2>
-<ul>
-  <% if current_user.answers %>
-    <% current_user.answers.each do |answer|%>
-      <li><a href="/questions/<%=answer.question.id%>"><%=answer.question.title%></a></li>
+  <h2>Your answers: </h2>
+  <ul>
+    <% if @user.answers %>
+      <% @user.answers.each do |answer|%>
+        <li><a href="/questions/<%=answer.question.id%>"><%=answer.question.title%></a></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
 
-<h3>Your comments: </h3>
-<ul>
-  <% if current_user.comments %>
-    <% current_user.comments.each do |comment|%>
-      <li><a href="/questions/<%=comment.question.id%>"><%=comment.question.title%></a></li>
+  <h3>Your comments: </h3>
+  <ul>
+    <% if @user.comments %>
+      <% @user.comments.each do |comment|%>
+        <% if comment.commentable_type == "Question" %>
+          <li><a href="/questions/<%=comment.commentable.id%>"><%=comment.commentable.title%></a></li>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
+
+  <h3>Your favorite answers: </h3>
+  <ul>
+    <% if @user.questions %>
+      <% @user.questions.each do |question|%>
+        <% if question.favorite_answer_id != 0 %>
+          <li><a href="/questions/<%=question.id%>"><%=question.title%></a></li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
