@@ -1,6 +1,13 @@
 <% if @question.answers %>
   <% @question.answers.each do |answer| %>
     <div class="answer">
+      <% if logged_in? %>
+        <% if @question.inquirer_id == current_user.id %>
+          <% if @question.favorite_answer_id != answer.id %>
+            <%= erb :'/questions/_favorite' %>
+          <% end %>
+        <% end %>
+      <% end %>
       <p data-answer-id="<%= answer.id %>"><%= answer.body %></p>
       <p>Answered by: <%= answer.responder.username %> on: <%= answer.responder.created_at %></p>
 
