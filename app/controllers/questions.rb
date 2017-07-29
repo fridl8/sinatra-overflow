@@ -5,6 +5,10 @@ end
 
 get "/questions/:id" do
   @question = Question.find_by(id: params[:id])
+  if request.xhr?
+    @vote = @question.votes.find_by(voter_id: current_user.id)
+    @vote.value.to_s
+  end
   erb :"questions/show"
 end
 

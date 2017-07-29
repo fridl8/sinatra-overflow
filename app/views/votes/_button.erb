@@ -1,7 +1,7 @@
 <% if @question %>
   <div id="<%=@question.id%>" class="vote_buttons">
-    <span class="upvote"> </span>
+    <span class="upvote<%=on_upvote%>"> </span>
     <p class="vote_count"><%=@question.sum_vote_values%></p>
-    <span class="downvote"> </span>
+    <span class="downvote<%=on_downvote%>"> </span>
   </div>
 <% end %>

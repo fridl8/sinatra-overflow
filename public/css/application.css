@@ -126,3 +126,6 @@ nav li a:hover {
   border-top: 20px solid blue;
 }
 
+.vote-error {
+  color: red;
+}
