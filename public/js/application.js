@@ -1,14 +1,15 @@
 $(document).ready(function() {
-
   newQuestionButtonClickEvent();
   newQuestionSubmit();
   newQuestionCommentButtonClickEvent();
   newQuestionCommentSubmit();
-  submitAnswerfromForm();
-  vote();
+  submitAnswerFromForm();
+  voteClickEvent();
+  newAnswerCommentButtonClickEvent();
+  newAnswerCommentSubmit();
 });
 // Functions
-  var submitAnswerfromForm = function () {
+  var submitAnswerFromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
     var question_route= $(this).attr("action");
@@ -83,7 +84,7 @@ var newQuestionCommentSubmit = function() {
   });
 }
 
-  var vote = function(){
+  var voteClickEvent = function(){
     $('.vote_buttons').on('click', function(event){
       $button = $(event.target);
       var question_id = $(this).attr("id");
@@ -131,3 +132,37 @@ var newQuestionCommentSubmit = function() {
       })
     });
   }
+
+var newAnswerCommentButtonClickEvent = function() {
+  $('.answer').on('click', "#toggle-a-comment-form", function(event) {
+    event.preventDefault();
+    $(event.target).parent().find(".answer-comment-form").toggle();
+    $(event.target).toggle();
+  });
+}
+
+var newAnswerCommentSubmit = function() {
+  $(".answer-comment-form").on("submit", "#new-comment-form", function(event) {
+    event.preventDefault();
+
+    var $formData = $(event.target);
+    var url = $formData.attr("action");
+    var type = $formData.attr("method");
+
+    var commentType = 'answer';
+    var answerCommentBody = $(event.target).find('textarea').val();
+    var commentAnswerId = $(event.target).find("input").first().val();
+
+console.log(answerCommentBody);
+console.log(commentAnswerId);
+
+    var request = $.ajax({
+      url: url,
+      method: type,
+      data: {body: answerCommentBody, comment_type: commentType, current_answer_id: commentAnswerId}
+    })
+    request.done(function(response) {
+      $(event.target).parent().parent().closest(".answer-comments").append(response);
+    })
+  })
+}
