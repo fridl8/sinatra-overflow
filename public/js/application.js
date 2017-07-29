@@ -97,12 +97,12 @@ var voteClickEvent = function(){
         var vote_data = {
           'vote' : 1
         };
-      } else {
-        console.log("DELETE VOTE!");
-        var vote_data = {
-          'vote' : 0
-        };
-      }
+        } else {
+          console.log("DELETE VOTE!");
+          var vote_data = {
+            'vote' : 0
+          };
+        }
     } else {
       var $otherButton =  $button.parent().find(".upvote");
       $otherButton.removeClass("on");
@@ -133,6 +133,7 @@ var voteClickEvent = function(){
   });
 }
 
+
 var newAnswerCommentButtonClickEvent = function() {
   $('.answer').on('click', "#toggle-a-comment-form", function(event) {
     event.preventDefault();
@@ -152,6 +153,7 @@ var newAnswerCommentSubmit = function() {
     var commentType = 'answer';
     var answerCommentBody = $(event.target).find('textarea').val();
     var commentAnswerId = $(event.target).parent().closest('.answer').find('p').first().attr('data-answer-id');
+    
     var request = $.ajax({
       url: url,
       method: type,
@@ -163,6 +165,7 @@ var newAnswerCommentSubmit = function() {
       $(event.target).parent().find('#toggle-a-comment-form').toggle();
       $(event.target).find('textarea').val("")
       $(event.target).parent().closest('.answer').parent().find('div').first().find('.answer-comments').append(response);
+
     })
   })
 }
