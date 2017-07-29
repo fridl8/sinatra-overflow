@@ -14,9 +14,8 @@ $(document).ready(function() {
   var submitAnswerFromForm = function () {
   	$(".answer_form").on("submit", function(event){
     event.preventDefault();
-    var question_route = $(this).attr("action");
+    var question_route = $(event.target).attr("action");
     var formData = {body: $(event.target).find('textarea').val()};
-
     var response = $.ajax({
       url : question_route,
       method : "POST",
@@ -216,7 +215,7 @@ var newAnswerCommentSubmit = function() {
 
     var commentType = 'answer';
     var answerCommentBody = $(event.target).find('textarea').val();
-    var commentAnswerId = $(event.target).parent().closest('.answer').find('p').first().attr('data-answer-id');
+    var commentAnswerId = $(event.target).parent().closest('.answer').find('p').last().prev().attr('data-answer-id');
 
     var request = $.ajax({
       url: url,

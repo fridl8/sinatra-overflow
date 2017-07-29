@@ -17,7 +17,7 @@ user_amount.times do
 end
 
 comment_amount.times do
-  Comment.create!(body: Faker::Hipster.paragraph, commenter_id: rand(1..user_amount), commentable_id: rand(1..comment_amount), commentable_type: COMMENT_AND_VOTE_TYPES.sample )
+  Comment.create!(body: Faker::Hipster.paragraph, commenter_id: rand(1..user_amount), commentable_id: rand(1..100), commentable_type: COMMENT_AND_VOTE_TYPES.sample )
 end
 
 question_amount.times do
