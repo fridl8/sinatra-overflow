@@ -1,3 +1,57 @@
+#toggle-question-form {
+  width: 100px;
+  padding-top: 10px;
+  padding-left: 200px;
+  padding-right: 200px;
+  vertical-align: middle;
+  position: relative;
+  left: 500px;
+  margin-left: -50px;
+  line-height: 25px;
+}
+
+.answer p {
+  color: white;
+}
+.answer {
+  background-color: rgb(11, 72, 79);
+
+}
+
+.comment-body, .comment-info {
+  background-color: rgb(49, 132, 100);
+}
+
+.register {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.register h2 {
+    text-align: center;
+}
+
+.register label {
+  display: inline-block;
+  width: 200px;
+  text-align: right;
+}
+
+.register input[type="submit"] {
+  position: relative;
+  left: 200px;
+}
+
+.login-form {
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+}
+
+.login-form, .register input {
+  margin: 10px;
+}
+
 nav ul{
   list-style-type: none;
   margin: 0;
@@ -67,7 +121,7 @@ nav li a:hover {
 }
 
 .answer_container div:nth-child(even) {
-  background: rgba(39, 117, 143, .25);
+  background: rgba(100, 117, 143);
 }
 
 .answer_form {

@@ -2,7 +2,7 @@
   <div class="question">
     <h1><%= @question.title %></h1>
     <span class="question_votes">Votes: <%=@question.votes.count%></span>
-    <p class="question_info">Created by: <a href="#"><%=@question.inquirer.username%></a> at <%=@question.created_at%></p>
+    <p class="question_info">Created by: <a href="/users/<%=@question.inquirer.id%>"><%=@question.inquirer.username%></a> at <%=@question.created_at%></p>
 
     <div class="question_body">
     <%= erb :"/votes/_button" %>

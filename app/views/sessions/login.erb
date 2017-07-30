@@ -1,7 +1,9 @@
-<div id="login_form">
-<p>Login Information:</p>
+<div class="login-form" id="login_form">
+<h2>Login Information:</h2>
 	<form action ="/sessions" method="POST">
+		<label>Email: </label>
 		<input type="email" name="user[email]" placeholder="Email" autofocus><br>
+		<label>Password: </label>
 		<input type="password" name="user[password]" placeholder="Password"><br>
 		<input type="submit" value="Login">
 	</form>
