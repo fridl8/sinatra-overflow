@@ -6,7 +6,7 @@ Question.delete_all
 Answer.delete_all
 Vote.delete_all
 
-user_amount = 50
+user_amount = 40
 comment_amount = 1000
 question_amount = 250
 vote_amount = 5000

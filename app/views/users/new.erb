@@ -1,9 +1,15 @@
-<h2>Registration!</h2>
+<div class="register">
+  <h2>Registration!</h2>
 
-<form action="/users" method="post">
-  <input type="text" name="user[username]" placeholder="Username" autofocus><br>
-  <input type="email" name="user[email]" placeholder="example@email.com"><br>
-  <input type="password" name="user[password]" placeholder="Password"><br>
-  <input type="password" name="confirm_password" placeholder="Confirm Password"><br><br>
-  <input type="submit" value="REGISTER!">
-</form>
+  <form  action="/users" method="post">
+    <label>Username: </label>
+    <input type="text" name="user[username]" placeholder="Username" autofocus><br>
+    <label>Email: </label>
+    <input type="email" name="user[email]" placeholder="example@email.com"><br>
+    <label>Password: </label>
+    <input type="password" name="user[password]" placeholder="Password"><br>
+    <label>Confirm password: </label>
+    <input type="password" name="confirm_password" placeholder="Confirm Password"><br><br>
+    <input type="submit" value="REGISTER!">
+  </form>
+</div>
